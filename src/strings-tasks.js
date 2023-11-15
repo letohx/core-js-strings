@@ -51,7 +51,9 @@ const isString = (value) =>
  *   concatenateStrings('aa', '') => 'aa'.
  *   concatenateStrings('', 'bb') => 'bb'
  */
-const concatenateStrings = (val1, val2) => `${val1}${val2}`;
+const concatenateStrings = (val1, val2) => {
+  return val1.concat(val2);
+};
 
 /**
  * Returns the first character of the given string.
@@ -64,7 +66,9 @@ const concatenateStrings = (val1, val2) => `${val1}${val2}`;
  *   getFirstChar('cat') => 'c'
  *   getFirstChar('') => ''
  */
-const getFirstChar = (value) => value[0] || '';
+const getFirstChar = (value) => {
+  return value.charAt(0);
+};
 
 /**
  * Removes leading and trailing whitespace characters from the string.
@@ -77,7 +81,9 @@ const getFirstChar = (value) => value[0] || '';
  *   removeLeadingAndTrailingWhitespaces('cat ') => 'cat'
  *   removeLeadingAndTrailingWhitespaces('\t\t\tHello, World! ') => 'Hello, World!'
  */
-const removeLeadingAndTrailingWhitespaces = (value) => value.trim();
+const removeLeadingAndTrailingWhitespaces = (value) => {
+  return value.trim();
+};
 
 /**
  * Removes only leading whitespace characters from the string.
@@ -90,7 +96,9 @@ const removeLeadingAndTrailingWhitespaces = (value) => value.trim();
  *   removeLeadingWhitespaces('cat ') => 'cat '
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
-const removeLeadingWhitespaces = (value) => value.trimStart();
+const removeLeadingWhitespaces = (value) => {
+  return value.trimStart();
+};
 
 /**
  * Removes only trailing whitespace characters from the string.
@@ -103,7 +111,9 @@ const removeLeadingWhitespaces = (value) => value.trimStart();
  *   removeTrailingWhitespaces('cat ') => 'cat'
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
-const removeTrailingWhitespaces = (value) => value.trimEnd();
+const removeTrailingWhitespaces = (value) => {
+  return value.trimEnd();
+};
 
 /**
  * Returns a string that is repeated the specified number of times.
@@ -118,7 +128,9 @@ const removeTrailingWhitespaces = (value) => value.trimEnd();
  *   repeatString('', 3) => ''
  *   repeatString('abc', -2) => ''
  */
-const repeatString = (str, times) => (times >= 0 ? str.repeat(times) : '');
+const repeatString = (str, times) => {
+  return times >= 0 ? str.repeat(times) : '';
+};
 
 /**
  * Remove the first occurrence of a substring from a string.
@@ -132,7 +144,10 @@ const repeatString = (str, times) => (times >= 0 ? str.repeat(times) : '');
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-const removeFirstOccurrences = (str, value) => str.replace(value, '');
+const removeFirstOccurrences = (str, value) => {
+  const deleteIndex = str.includes(value) ? str.indexOf(value) : str.length;
+  return `${str.slice(0, deleteIndex)}${str.slice(deleteIndex + value.length)}`;
+};
 
 /**
  * Remove the last occurrence of a substring from a string.
@@ -146,15 +161,10 @@ const removeFirstOccurrences = (str, value) => str.replace(value, '');
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-const removeLastOccurrences = (str, value) =>
-  str
-    .split(' ')
-    .reverse()
-    .join(' ')
-    .replace(value, '')
-    .split(' ')
-    .reverse()
-    .join(' ');
+const removeLastOccurrences = (str, value) => {
+  const deleteIndex = str.includes(value) ? str.lastIndexOf(value) : str.length;
+  return `${str.slice(0, deleteIndex)}${str.slice(deleteIndex + value.length)}`;
+};
 
 /**
  * Calculate the sum of character codes of the given string.
@@ -168,8 +178,11 @@ const removeLastOccurrences = (str, value) =>
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-const sumOfCodes = (str) =>
-  str ? str.split('').reduce((acc, num) => acc + num.charCodeAt(0), 0) : 0;
+const sumOfCodes = (str) => {
+  return str
+    ? str.split('').reduce((acc, num) => acc + num.charCodeAt(0), 0)
+    : 0;
+};
 
 /**
  * Checks if a string starts with a specific substring.
@@ -182,7 +195,9 @@ const sumOfCodes = (str) =>
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-const startsWith = (str, substr) => str.startsWith(substr);
+const startsWith = (str, substr) => {
+  return str.startsWith(substr);
+};
 
 /**
  * Checks if a string ends with a specific substring.
@@ -195,7 +210,9 @@ const startsWith = (str, substr) => str.startsWith(substr);
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-const endsWith = (str, substr) => str.endsWith(substr);
+const endsWith = (str, substr) => {
+  return str.endsWith(substr);
+};
 
 /**
  * Returns a time string in the "mm:ss" format.
@@ -210,8 +227,9 @@ const endsWith = (str, substr) => str.endsWith(substr);
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-const formatTime = (m, s) =>
-  `${`${m}`.length < 2 ? 0 : ''}${m}:${`${s}`.length < 2 ? 0 : ''}${s}`;
+const formatTime = (m, s) => {
+  return `${`${m}`.padStart(2, 0)}:${`${s}`.padStart(2, 0)}`;
+};
 
 /**
  * Returns a string in reverse order.
@@ -250,7 +268,9 @@ const orderAlphabetically = (str) => str.split('').sort().join('');
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-const containsSubstring = (str, substring) => str.includes(substring);
+const containsSubstring = (str, substring) => {
+  return str.includes(substring);
+};
 
 /**
  * Returns the number of vowels in the string.
@@ -335,11 +355,12 @@ const reverseWords = (str) =>
  *   invertCase('JavaScript is Fun') => 'jAVASCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-const invertCase = (str) =>
-  str
+const invertCase = (str) => {
+  return str
     .split('')
     .map((x) => (x === x.toUpperCase() ? x.toLowerCase() : x.toUpperCase()))
     .join('');
+};
 
 /**
  * Returns the result of string template and given parameters firstName and lastName.
@@ -398,7 +419,9 @@ const unbracketTag = (str) => str.slice(1, -1);
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-const extractEmails = (str) => str.split(';');
+const extractEmails = (str) => {
+  return str.split(';');
+};
 
 /**
  * Encode specified string with ROT13 cipher
